@@ -6,20 +6,19 @@
             <header class="panel-heading">
                 Thêm danh mục sản phẩm
             </header>
+            @yield('message')
             <div class="panel-body">
                 <div class="position-center">
-                    <form role="form">
+                    <form role="form" action="{{route('admin.categories.store')}}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label>Tên danh mục</label>
-                            <input type="text" class="form-control" id="name" placeholder="Tên danh mục">
-                        </div>
-                        <div class="form-group">
-                            <label>Mã danh mục</label>
-                            <input type="text" class="form-control" id="code" placeholder="Mã danh mục">
+                            <input type="text" class="form-control" name="name" placeholder="Tên danh mục">
+                            <p class="help text-error">{{ $errors->first('name') }}</p>
                         </div>
                         <div class="form-group">
                             <label>Mô tả</label>
-                            <textarea class="form-control" id="description" placeholder="Mô tả" style="resize: none" rows="8"></textarea>
+                            <textarea class="form-control" name="description" placeholder="Mô tả" style="resize: none" rows="8"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Trạng thái</label>

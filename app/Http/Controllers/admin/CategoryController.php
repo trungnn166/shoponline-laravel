@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Helper\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Service\Impl\CategoryServiceImpl;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller {
+
+    private $categoryService;
+
+    public function __construct(CategoryServiceImpl $categoryService) {
+		$this->categoryService = $categoryService;
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -30,9 +40,9 @@ class CategoryController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CategoryRequest $request) {
+        $request->session()->flash('alert-success', Message::MESSAGE_CREATE_SUCCESS);
+        return redirect()->route('admin.categories.create'); 
     }
 
     /**

@@ -3155,3 +3155,9 @@ div#graph1, div#graph4, div#graph5, div#graph6, div#graph7, div#graph8, div#grap
 .full-width {
     width: 100%;
 }
+
+.text-error {
+    font-size: 14px;
+    color: red;
+}
+
