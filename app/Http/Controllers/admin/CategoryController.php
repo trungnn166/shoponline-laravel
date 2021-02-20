@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Helper\Constants;
+use App\Helper\Helper;
 use App\Helper\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
@@ -22,7 +24,9 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.categories.index', ['title' => 'Danh sách danh mục']);
+        $categories = $this->categoryService->getData();
+        return view('admin.categories.index', 
+                    ['title' => 'Danh sách danh mục', 'categories' => $categories]);
     }
 
     /**
@@ -41,7 +45,8 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request) {
-        $request->session()->flash('alert-success', Message::MESSAGE_CREATE_SUCCESS);
+        $result = $this->categoryService->create($request->all());
+        $request->session()->flash('alert-success', ['icon' => 'fa fa-check-circle', 'message' => Message::MESSAGE_CREATE_SUCCESS]);
         return redirect()->route('admin.categories.create'); 
     }
 
@@ -85,4 +90,15 @@ class CategoryController extends Controller {
     public function destroy($id) {
         //
     }
+
+    public function changeStatus(Request $request) {
+        if(!is_numeric($request->id)) {
+            $res = Helper::createResponseFail(Constants::TYPE_UPDATE);
+            return response()->json($res, 201); 
+        }
+        $result = $this->categoryService->changeStatus($request->id);
+        $res = ($result) ? Helper::createResponseSuccess(Constants::TYPE_UPDATE) : Helper::createResponseFail(Constants::TYPE_UPDATE);
+        return response()->json($res, 201); 
+    }
+
 }

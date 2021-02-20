@@ -3,8 +3,8 @@
    <title>{{$title}}</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-      Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+   <meta name="csrf-token" content="{{ csrf_token() }}" />
+
    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
    <!-- bootstrap-css -->
    <link rel="stylesheet" href="{{asset('admin/css/bootstrap.min.css')}}" >
@@ -25,7 +25,10 @@
    <script src="{{asset('admin/js/jquery2.0.3.min.js')}}"></script>
    <script src="{{asset('admin/js/raphael-min.js')}}"></script>
    <script src="{{asset('admin/js/morris.js')}}"></script>
-
+   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+   {{-- my js --}}
+   <script src="{{asset('admin/js/common.js')}}"></script>
 </head>
 <body>
    <section id="container">
@@ -272,6 +275,13 @@
       <!--main content start-->
       <section id="main-content">
          <section class="wrapper">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                 <li class="breadcrumb-item"><a href="#">Home</a></li>
+                 <li class="breadcrumb-item"><a href="#">Library</a></li>
+                 <li class="breadcrumb-item active" aria-current="page">Data</li>
+               </ol>
+             </nav>
             @yield('content')
          </section>
          <!-- footer -->

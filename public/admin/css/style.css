@@ -3161,3 +3161,25 @@ div#graph1, div#graph4, div#graph5, div#graph6, div#graph7, div#graph8, div#grap
     color: red;
 }
 
+.alert-css {
+    height: 100px;
+}
+.flash-message {
+    width: 300px;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    z-index: 10000;
+}
+
+.flash-message p {
+    line-height: 40px;
+}
+
+.flash-message i {
+    font-size: 20px
+}
+
+.flash-message label {
+    font-size: 15px;
+}

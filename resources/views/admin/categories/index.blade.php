@@ -27,34 +27,38 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped b-t b-light">
-                <thead>
-                    <tr>
-                        <th style="width:20px;">
-                            <label class="i-checks m-b-none">
-                            <input type="checkbox"><i></i>
-                            </label>
-                        </th>
-                        <th>Tên danh mục</th>
-                        <th>Mã danh mục</th>
-                        <th>Trạng thái</th>
-                        <th>Mô tả</th>
-                        <th ></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                        <td>Idrawfast prototype design prototype design prototype design prototype design prototype design</td>
-                        <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
-                        <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
-                        <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
-                        <td>
-                            <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success"></i></a>
-                            <a href="" class="active" ui-toggle-class=""><i class="fa fa-trash text-danger"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
+                @include('admin.components.message-ajax')
+
+                <table class="table table-striped b-t b-light" id="tbl">
+                    <thead>
+                        <tr>
+                            <th style="width:20px;">
+                                <label class="i-checks m-b-none">
+                                    <input type="checkbox"><i></i>
+                                </label>
+                            </th>
+                            <th>Tên danh mục</th>
+                            <th>Hiển thị</th>
+                            <th>Mô tả</th>
+                            <th ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                                <td>{{$category->name}}</td>
+                                <td><span class="text-ellipsis">
+                                    <a href="javascript:;" class="btn-status" id="{{$category->id}}"><input type="checkbox"   @if($category->status) checked @endif data-toggle="toggle" data-onstyle="success" data-size="sm"></a>
+                                </td>
+                                <td><span class="text-ellipsis">{{$category->description}}</span></td>
+                                <td>
+                                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success"></i></a>
+                                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             <footer class="panel-footer">
@@ -76,4 +80,5 @@
             </footer>
         </div>
     </div>
+    <script src="{{asset('admin/ajax/category.js')}}"></script>
 @endsection

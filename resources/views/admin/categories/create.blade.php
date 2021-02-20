@@ -6,7 +6,7 @@
             <header class="panel-heading">
                 Thêm danh mục sản phẩm
             </header>
-            @yield('message')
+            @include('admin.components.message')
             <div class="panel-body">
                 <div class="position-center">
                     <form role="form" action="{{route('admin.categories.store')}}" method="POST">

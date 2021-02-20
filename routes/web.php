@@ -32,6 +32,7 @@ Route::group(['prefix'=>'quan-ly','as'=>'admin.'], function () {
             Route::get('', [CategoryController::class, 'index'])->name('index');
             Route::get('them-moi', [CategoryController::class, 'create'])->name('create');
             Route::post('them-moi', [CategoryController::class, 'store'])->name('store');
+            Route::put('thay-doi-trang-thai', [CategoryController::class, 'changeStatus'])->name('changeStatus');
         });
     });
 });
