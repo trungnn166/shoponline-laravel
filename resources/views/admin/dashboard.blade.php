@@ -1,5 +1,6 @@
 @extends('admin.layout')
 @section('content')
+{{ Breadcrumbs::render('admin.dashboard') }}
 <div class="market-updates">
    <div class="col-md-3 market-update-gd">
       <div class="market-update-block clr-block-2">

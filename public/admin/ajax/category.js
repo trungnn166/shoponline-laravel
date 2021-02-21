@@ -1,23 +1,34 @@
 $(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    const URL_CATEGORY = '/admin/api/categories';
+
+    $("#check-all").on('click', function() {
+        $(".input-checkbox").prop('checked', $(this).prop('checked'));  
     });
+    
+    $(".input-checkbox").on('click', function() {
+        if (!$(this).prop("checked")) {
+            $("#check-all").prop("checked", false);
+        }
+    });    
+
+    $('#btn-delete-selected').on('click', function() {
+        var ids = $('input[name="ids[]"]:checked').map(function(){
+            return $(this).val();
+        }).get();
+        var url = URL_CATEGORY + '/delete';
+        destroy(url, ids);
+    })
+
     $('#tbl').on("click", '.btn-status', function() {
         var id = $(this).attr('id');
-        $.ajax({
-            type: "put",
-            processData: false,
-            contentType: false,
-            url: URL_CATEGORY + '/thay-doi-trang-thai?id='+id,
-            success: function(res) {
-               showAlert(res);
-            },
-            error: function() {
-                res = {'class':'alert-danger', 'icon': 'fa fa-exclamation-circle'};
-                showAlert(res);
-            }
-        })
+        url = URL_CATEGORY + '/change-status/' + id;
+        changeStatus(url);
     });
+
+    $('#tbl').on("click", '.btn-delete', function() {
+        var ids = [$(this).attr('id')];
+        var url = URL_CATEGORY + '/delete';
+        destroy(url, ids);
+    });
+
 });

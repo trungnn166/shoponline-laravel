@@ -15,4 +15,5 @@ class Message {
     const MESSAGE_CREATE_FAIL = "Thêm mới không thành công.";
     const MESSAGE_UPDATE_FAIL = "Cập nhật không thành công.";
     const MESSAGE_DELETE_FAIL = "Xóa không thành công.";
+    const MESSAGE_NOT_FOUND = "Không tồn tại";
 }

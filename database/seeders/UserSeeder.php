@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'trungnn160697@gmail.com',
             'password' => bcrypt('123456'),
             'phone' => '0396927189',
+            'avatar' => 'admin/images/2.png',
             'role_id' => 1
         ]);
     }

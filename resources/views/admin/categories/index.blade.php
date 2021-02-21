@@ -1,5 +1,6 @@
 @extends('admin.layout')
 @section('content')
+    {{ Breadcrumbs::render('admin.categories.index') }}
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -7,13 +8,7 @@
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
-                <select class="input-sm form-control w-sm inline v-middle">
-                    <option value="0">Bulk action</option>
-                    <option value="1">Delete selected</option>
-                    <option value="2">Bulk edit</option>
-                    <option value="3">Export</option>
-                </select>
-                <button class="btn btn-sm btn-default">Apply</button>                
+                <button class="btn btn-sm btn-danger" id="btn-delete-selected"><i class="fa fa-trash"></i> Xóa mục đã chọn</button>                
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -34,7 +29,7 @@
                         <tr>
                             <th style="width:20px;">
                                 <label class="i-checks m-b-none">
-                                    <input type="checkbox"><i></i>
+                                    <input type="checkbox" id="check-all">
                                 </label>
                             </th>
                             <th>Tên danh mục</th>
@@ -45,16 +40,16 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $category)
-                            <tr>
-                                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                            <tr id="row-{{$category->id}}">
+                                <td><label class="i-checks m-b-none"><input type="checkbox" class="input-checkbox" name="ids[]" value="{{$category->id}}"></label></td>
                                 <td>{{$category->name}}</td>
                                 <td><span class="text-ellipsis">
                                     <a href="javascript:;" class="btn-status" id="{{$category->id}}"><input type="checkbox"   @if($category->status) checked @endif data-toggle="toggle" data-onstyle="success" data-size="sm"></a>
                                 </td>
                                 <td><span class="text-ellipsis">{{$category->description}}</span></td>
                                 <td>
-                                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success"></i></a>
-                                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-trash text-danger"></i></a>
+                                    <a href="{{ route('admin.categories.edit', $category->url) }}" class="active" ui-toggle-class=""><i class="fa fa-pencil text-success"></i></a>
+                                    <a href="javascript:;" id="{{$category->id}}" class="active btn-delete" ui-toggle-class=""><i class="fa fa-trash text-danger"></i></a>
                                 </td>
                             </tr>
                         @endforeach

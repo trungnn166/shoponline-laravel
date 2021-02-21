@@ -46,7 +46,7 @@ class CategoryController extends Controller {
      */
     public function store(CategoryRequest $request) {
         $result = $this->categoryService->create($request->all());
-        $request->session()->flash('alert-success', ['icon' => 'fa fa-check-circle', 'message' => Message::MESSAGE_CREATE_SUCCESS]);
+        ($result) ? Helper::createFlashSuccess($request, Constants::TYPE_CREATE) : Helper::createFlashFail($request, Constants::TYPE_CREATE);
         return redirect()->route('admin.categories.create'); 
     }
 
@@ -66,8 +66,14 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function edit(Request $request, $url = null) {
+        $category = $this->categoryService->findByUrl($url);
+        if($category == null) {
+            $request->session()->flash('alert-success', ['icon' => 'fa fa-exclamation-circle', 'message' => Message::MESSAGE_NOT_FOUND.' danh mục này.']);
+            Helper::createFlashSuccess($request, Constants::TYPE_NOT_FOUND);
+            return redirect()->route('admin.categories.index'); 
+        }
+        return view('admin.categories.edit', ['title' => 'Chỉnh sửa danh mục', 'category' => $category]);
     }
 
     /**
@@ -77,8 +83,16 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(CategoryRequest $request) {
+        $result = $this->categoryService->update($request->all());
+        if(!empty($result)) {
+            Helper::createFlashSuccess($request, Constants::TYPE_UPDATE);
+            $url = $result;
+        } else {
+            Helper::createFlashFail($request, Constants::TYPE_UPDATE);
+            $url = $request['url'];
+        } 
+        return redirect()->route('admin.categories.edit', ['url' => $url]); 
     }
 
     /**
@@ -87,16 +101,19 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy(Request $request) {
         //
+        $result = $this->categoryService->destroy($request->ids);
+        $res = ($result) ? Helper::createResponseSuccess(Constants::TYPE_DELETE) : Helper::createResponseFail(Constants::TYPE_DELETE);
+        return response()->json($res, 201); 
     }
 
-    public function changeStatus(Request $request) {
-        if(!is_numeric($request->id)) {
+    public function changeStatus($id) {
+        if(!is_numeric($id)) {
             $res = Helper::createResponseFail(Constants::TYPE_UPDATE);
             return response()->json($res, 201); 
         }
-        $result = $this->categoryService->changeStatus($request->id);
+        $result = $this->categoryService->changeStatus($id);
         $res = ($result) ? Helper::createResponseSuccess(Constants::TYPE_UPDATE) : Helper::createResponseFail(Constants::TYPE_UPDATE);
         return response()->json($res, 201); 
     }

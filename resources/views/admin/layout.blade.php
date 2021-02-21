@@ -20,13 +20,19 @@
    <link rel="stylesheet" href="{{asset('admin/css/morris.css')}}" type="text/css"/>
    <!-- calendar -->
    <link rel="stylesheet" href="{{asset('admin/css/monthly.css')}}">
+   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+   <!-- modal confirm -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
    <!-- //calendar -->
    <!-- //font-awesome icons -->
    <script src="{{asset('admin/js/jquery2.0.3.min.js')}}"></script>
    <script src="{{asset('admin/js/raphael-min.js')}}"></script>
    <script src="{{asset('admin/js/morris.js')}}"></script>
-   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+   <!-- checkbox toggle-->
    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+   <!-- modal confirm -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
    {{-- my js --}}
    <script src="{{asset('admin/js/common.js')}}"></script>
 </head>
@@ -127,7 +133,7 @@
                      </li>
                      <li>
                         <a href="#">
-                        <span class="photo"><img alt="avatar" src="admin/images/3.png"></span>
+                        <span class="photo"><img alt="avatar" src="{{asset('admin/images/3.png')}}"></span>
                         <span class="subject">
                         <span class="from">Jonathan Smith</span>
                         <span class="time">Just now</span>
@@ -139,7 +145,7 @@
                      </li>
                      <li>
                         <a href="#">
-                        <span class="photo"><img alt="avatar" src="admin/images/1.png"></span>
+                        <span class="photo"><img alt="avatar" src="{{asset('admin/images/1.png')}}"></span>
                         <span class="subject">
                         <span class="from">Jane Doe</span>
                         <span class="time">2 min ago</span>
@@ -151,7 +157,7 @@
                      </li>
                      <li>
                         <a href="#">
-                        <span class="photo"><img alt="avatar" src="admin/images/3.png"></span>
+                        <span class="photo"><img alt="avatar" src="{{asset('admin/images/3.png')}}"></span>
                         <span class="subject">
                         <span class="from">Tasi sam</span>
                         <span class="time">2 days ago</span>
@@ -163,7 +169,7 @@
                      </li>
                      <li>
                         <a href="#">
-                        <span class="photo"><img alt="avatar" src="admin/images/2.png"></span>
+                        <span class="photo"><img alt="avatar" src="{{asset('admin/images/2.png')}}"></span>
                         <span class="subject">
                         <span class="from">Mr. Perfect</span>
                         <span class="time">2 hour ago</span>
@@ -228,8 +234,8 @@
                <!-- user login dropdown start-->
                <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                  <img alt="" src="admin/images/2.png">
-                  <span class="username">John Doe</span>
+                  <img alt="" src="{{asset(Auth::user()->avatar)}}">
+                  <span class="username"> {{Auth::user()->name}}</span>
                   <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu extended logout">
@@ -275,13 +281,6 @@
       <!--main content start-->
       <section id="main-content">
          <section class="wrapper">
-            <nav aria-label="breadcrumb">
-               <ol class="breadcrumb">
-                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                 <li class="breadcrumb-item"><a href="#">Library</a></li>
-                 <li class="breadcrumb-item active" aria-current="page">Data</li>
-               </ol>
-             </nav>
             @yield('content')
          </section>
          <!-- footer -->
