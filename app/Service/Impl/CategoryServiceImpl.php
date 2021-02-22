@@ -1,6 +1,7 @@
 <?php
 namespace App\Service\Impl;
 
+use App\Helper\Constants;
 use App\Helper\Helper;
 use App\Models\Category;
 use App\Service\CategoryService;
@@ -8,8 +9,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryServiceImpl implements CategoryService {
 
-    public function getData() {
-        $data = Category::all();
+    public function getData($params) {
+        $name = isset($params['name']) ? $params['name'] : '';
+        $data = Category::where('name', 'LIKE',  '%'.$name.'%')->paginate(Constants::PAGE_SIZE);
+        $data->appends($params);
         return $data;
     }
 

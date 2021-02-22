@@ -23,10 +23,11 @@ class CategoryController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $categories = $this->categoryService->getData();
+    public function index(Request $request) {
+        $params = $request->all();
+        $categories = $this->categoryService->getData($params);
         return view('admin.categories.index', 
-                    ['title' => 'Danh sách danh mục', 'categories' => $categories]);
+                    ['title' => 'Danh sách danh mục', 'categories' => $categories, 'params'=>$params]);
     }
 
     /**

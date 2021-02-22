@@ -6,6 +6,8 @@ class Constants {
     const TYPE_UPDATE = 2;
     const TYPE_DELETE = 3;
     const TYPE_NOT_FOUND = 4;
+    
+    const PAGE_SIZE = 20;
     const RESPONSE_NOTIFICATION_SUCCESS = [
         'class' => 'alert-success',
         'icon' => 'fa fa-check-circle',

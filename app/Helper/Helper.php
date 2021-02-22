@@ -1,6 +1,7 @@
 <?php
 namespace App\Helper;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
