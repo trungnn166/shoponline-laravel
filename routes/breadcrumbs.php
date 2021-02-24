@@ -23,3 +23,29 @@ Breadcrumbs::register('admin.categories.edit', function ($breadcrumbs) {
     $breadcrumbs->push('Chỉnh sửa danh mục', route('admin.categories.edit'));
 });
 
+//breadcrumbs brands
+Breadcrumbs::register('admin.brands.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Danh sách thương hiệu', route('admin.brands.index'));
+});
+
+Breadcrumbs::register('admin.brands.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.brands.index');
+    $breadcrumbs->push('Thêm mới thương hiệu', route('admin.brands.create'));
+});
+
+Breadcrumbs::register('admin.brands.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.brands.index');
+    $breadcrumbs->push('Chỉnh sửa thương hiệu', route('admin.brands.edit'));
+});
+
+
+//breadcrumbs products
+Breadcrumbs::register('admin.products.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Danh sách sản phẩm', route('admin.products.index'));
+});
+Breadcrumbs::register('admin.products.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.products.index');
+    $breadcrumbs->push('Thêm mới sản phẩm', route('admin.products.create'));
+});

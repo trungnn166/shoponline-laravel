@@ -3,22 +3,22 @@ namespace App\Service\Impl;
 
 use App\Helper\Constants;
 use App\Helper\Helper;
-use App\Models\Category;
-use App\Service\CategoryService;
+use App\Models\Brand;
+use App\Service\BrandService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class CategoryServiceImpl implements CategoryService {
+class BrandServiceImpl implements BrandService {
 
     public function getData($params) {
         $name = isset($params['name']) ? $params['name'] : '';
-        $data = Category::where('name', 'LIKE',  '%'.$name.'%')->paginate(Constants::PAGE_SIZE);
+        $data = Brand::where('name', 'LIKE',  '%'.$name.'%')->paginate(Constants::PAGE_SIZE);
         $data->appends($params);
         return $data;
     }
 
     public function findByUrl($url) {
         try {
-            return Category::where('url', $url)->firstOrFail(); 
+            return Brand::where('url', $url)->firstOrFail(); 
         } catch(ModelNotFoundException $e) {
             return null;
         }
@@ -26,14 +26,14 @@ class CategoryServiceImpl implements CategoryService {
 
     public function create($data) {
         $data['url'] = Helper::createUrl($data['name']);
-        return Category::create($data);
+        return Brand::create($data);
     }
 
     public function update($data) {
         $data['url'] = Helper::createUrl($data['name']);
         try {
-            $category = Category::findOrFail($data['id']);
-            $result =  $category->update($data);
+            $brand = Brand::findOrFail($data['id']);
+            $result =  $brand->update($data);
             return (($result) ? $data['url'] : false);
         } catch (ModelNotFoundException $e) {
             return false;
@@ -41,29 +41,22 @@ class CategoryServiceImpl implements CategoryService {
     }
 
     public function destroy($ids) {
-        $result = Category::destroy($ids);
+        $result = Brand::destroy($ids);
         return $result;
     }
     
     public function changeStatus($id) {
         try {
-            $category = Category::findOrFail($id);
-            $category->status = !($category->status);
-            return $category->save();
+            $brand = Brand::findOrFail($id);
+            $brand->status = !($brand->status);
+            return $brand->save();
         } catch (ModelNotFoundException $e) {
             return false;
         }
     }
 
     public function getDataActive() {
-        $data = Category::where('status', 1)->get();
+        $data = Brand::where('status', 1)->get();
         return $data;
-    }
-
-    public function getListParent() {
-        $parents = Category::where(function ($q) {
-            $q->whereNull('parent_id')->orWhere('parent_id', 0);
-        })->get();
-        return $parents;
     }
 }

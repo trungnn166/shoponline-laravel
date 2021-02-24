@@ -20,6 +20,16 @@
                             <p class="help text-error">{{ $errors->first('name') }}</p>
                         </div>
                         <div class="form-group">
+                            <label>Danh mục cha</label>
+                            <div class="form-group ">
+                                <select class="selectpicker form-control" data-live-search="true" name="parent_id" title="Lựa chọn danh mục cha...">
+                                    @foreach ($parents as $parent)
+                                        <option value="{{$parent->id}}" @if($category->parent_id == $parent->id) selected @endif>{{$parent->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Mô tả</label>
                             <textarea class="form-control" name="description" placeholder="Mô tả" style="resize: none" rows="8">{{$category->description}}</textarea>
                         </div>

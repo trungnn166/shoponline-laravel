@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryTable extends Migration
+class CreateBrandTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_category', function (Blueprint $table) {
+        Schema::create('tbl_brand', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("description")->nullable();
             $table->boolean("status")->default(true);
             $table->string("url")->nullable();
-            $table->integer("parent_id")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +31,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_category');
+        Schema::dropIfExists('tbl_brand');
     }
 }

@@ -13,7 +13,6 @@
       </section>
       <!--main content end-->
    </section>
-   <script src="{{asset('admin/js/bootstrap.js')}}"></script>
    <script src="{{asset('admin/js/jquery.dcjqaccordion.2.7.js')}}"></script>
    <script src="{{asset('admin/js/scripts.js')}}"></script>
    <script src="{{asset('admin/js/jquery.slimscroll.js')}}"></script>

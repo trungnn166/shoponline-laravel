@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model {
+class Brand extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'tbl_category';
+    protected $table = 'tbl_brand';
 
     protected $fillable = [
         'name',
         'description',
         'status',
-        'url',
-        'parent_id'
+        'url'
     ];
-
-    public function parent() {
-        return $this->belongsTo(Category::class, 'parent_id', 'id');
-    }
 
 }

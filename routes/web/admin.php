@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\LoginController; 
+use App\Http\Controllers\admin\LoginController;
+use App\Http\Controllers\admin\ProductController;
 
 Route::group(['prefix'=>'quan-ly','as'=>'admin.'], function () {
     Route::get('dang-nhap', [LoginController::class, 'index'])->name('login');
@@ -20,6 +22,22 @@ Route::group(['prefix'=>'quan-ly','as'=>'admin.'], function () {
             Route::post('them-moi', [CategoryController::class, 'store'])->name('store');
             Route::put('thay-doi-trang-thai', [CategoryController::class, 'changeStatus'])->name('changeStatus');
             Route::post('cap-nhat', [CategoryController::class, 'update'])->name('update');
+        });
+
+        //route brand
+        Route::group(['prefix'=>'thuong-hieu-san-pham','as'=>'brands.'], function () {
+            Route::get('', [BrandController::class, 'index'])->name('index');
+            Route::get('them-moi', [BrandController::class, 'create'])->name('create');
+            Route::get('chinh-sua/{url?}', [BrandController::class, 'edit'])->name('edit');
+            Route::post('them-moi', [BrandController::class, 'store'])->name('store');
+            Route::put('thay-doi-trang-thai', [BrandController::class, 'changeStatus'])->name('changeStatus');
+            Route::post('cap-nhat', [BrandController::class, 'update'])->name('update');
+        });
+
+        //route product
+        Route::group(['prefix'=>'san-pham','as'=>'products.'], function () {
+            Route::get('', [ProductController::class, 'index'])->name('index');
+            Route::get('/them-moi', [ProductController::class, 'create'])->name('create');
         });
     });
 });

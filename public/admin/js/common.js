@@ -6,6 +6,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+$('.selectpicker').selectpicker();
 
 function showAlert(res) {
     $('#flash-message').show();

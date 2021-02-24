@@ -6,16 +6,16 @@ use App\Helper\Constants;
 use App\Helper\Helper;
 use App\Helper\Message;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Service\Impl\CategoryServiceImpl;
+use App\Http\Requests\BrandRequest;
+use App\Service\Impl\BrandServiceImpl;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller {
+class BrandController extends Controller {
 
-    private $categoryService;
+    private $brandService;
 
-    public function __construct(CategoryServiceImpl $categoryService) {
-		$this->categoryService = $categoryService;
+    public function __construct(BrandServiceImpl $brandService) {
+		$this->brandService = $brandService;
 	}
 
     /**
@@ -25,9 +25,9 @@ class CategoryController extends Controller {
      */
     public function index(Request $request) {
         $params = $request->all();
-        $categories = $this->categoryService->getData($params);
-        return view('admin.categories.index', 
-                    ['title' => 'Danh sách danh mục', 'categories' => $categories, 'params'=>$params]);
+        $brands = $this->brandService->getData($params);
+        return view('admin.brands.index', 
+                    ['title' => 'Danh sách thương hiệu', 'brands' => $brands, 'params'=>$params]);
     }
 
     /**
@@ -36,8 +36,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $parents = $this->categoryService->getListParent();
-        return view('admin.categories.create', ['title' => 'Thêm mới danh mục', 'parents' => $parents]);
+        return view('admin.brands.create', ['title' => 'Thêm mới thương hiệu']);
     }
 
     /**
@@ -46,10 +45,10 @@ class CategoryController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request) {
-        $result = $this->categoryService->create($request->all());
+    public function store(BrandRequest $request) {
+        $result = $this->brandService->create($request->all());
         ($result) ? Helper::createFlashSuccess($request, Constants::TYPE_CREATE) : Helper::createFlashFail($request, Constants::TYPE_CREATE);
-        return redirect()->route('admin.categories.create'); 
+        return redirect()->route('admin.brands.create'); 
     }
 
     /**
@@ -69,14 +68,13 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $url = null) {
-        $category = $this->categoryService->findByUrl($url);
-        $parents = $this->categoryService->getListParent();
-        if($category == null) {
+        $brand = $this->brandService->findByUrl($url);
+        if($brand == null) {
             $request->session()->flash('alert-success', ['icon' => 'fa fa-exclamation-circle', 'message' => Message::MESSAGE_NOT_FOUND.' danh mục này.']);
             Helper::createFlashSuccess($request, Constants::TYPE_NOT_FOUND);
             return redirect()->route('admin.categories.index'); 
         }
-        return view('admin.categories.edit', ['title' => 'Chỉnh sửa danh mục', 'category' => $category, 'parents' => $parents]);
+        return view('admin.brands.edit', ['title' => 'Chỉnh sửa danh mục', 'brand' => $brand]);
     }
 
     /**
@@ -86,8 +84,8 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request) {
-        $result = $this->categoryService->update($request->all());
+    public function update(BrandRequest $request) {
+        $result = $this->brandService->update($request->all());
         if(!empty($result)) {
             Helper::createFlashSuccess($request, Constants::TYPE_UPDATE);
             $url = $result;
@@ -95,7 +93,7 @@ class CategoryController extends Controller {
             Helper::createFlashFail($request, Constants::TYPE_UPDATE);
             $url = $request['url'];
         } 
-        return redirect()->route('admin.categories.edit', ['url' => $url]); 
+        return redirect()->route('admin.brands.edit', ['url' => $url]); 
     }
 
     /**
@@ -106,7 +104,7 @@ class CategoryController extends Controller {
      */
     public function destroy(Request $request) {
         //
-        $result = $this->categoryService->destroy($request->ids);
+        $result = $this->brandService->destroy($request->ids);
         $res = ($result) ? Helper::createResponseSuccess(Constants::TYPE_DELETE) : Helper::createResponseFail(Constants::TYPE_DELETE);
         return response()->json($res, 201); 
     }
@@ -116,7 +114,7 @@ class CategoryController extends Controller {
             $res = Helper::createResponseFail(Constants::TYPE_UPDATE);
             return response()->json($res, 201); 
         }
-        $result = $this->categoryService->changeStatus($id);
+        $result = $this->brandService->changeStatus($id);
         $res = ($result) ? Helper::createResponseSuccess(Constants::TYPE_UPDATE) : Helper::createResponseFail(Constants::TYPE_UPDATE);
         return response()->json($res, 201); 
     }
