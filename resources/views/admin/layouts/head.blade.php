@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <!-- bootstrap select CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    {{-- tag input --}}
+    <link rel="stylesheet" href="{{asset('admin/css/bootstrap-tagsinput.css')}}">
+
     <!-- //calendar -->
     <!-- //font-awesome icons -->
     <script src="{{asset('admin/js/jquery2.0.3.min.js')}}"></script>
@@ -37,6 +40,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- bootstrap select js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    {{-- tag input --}}
+    <script src="{{asset('admin/js/bootstrap-tagsinput.js')}}"></script>
     {{-- my js --}}
     <script src="{{asset('admin/js/common.js')}}"></script>
 </head>

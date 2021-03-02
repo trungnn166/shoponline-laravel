@@ -239,6 +239,8 @@ ul.sidebar-menu li a.active i {
     width:100%;
     background-color: #ecf0f5;
     min-height: 827px;
+    z-index: 100000;
+    position: relative;
 }
 .brand {
     background:#222d32;
@@ -1426,7 +1428,7 @@ li.list-group-item1 {
 	background-color: #03a9f4;
 }
 .badge-success {
-	background-color: #fb5710;
+	background-color: #28a745;
 }
 .badge-warning {
 	background-color: #ffc107;
@@ -3192,4 +3194,16 @@ div#graph1, div#graph4, div#graph5, div#graph6, div#graph7, div#graph8, div#grap
 
 .font-size-12 {
     font-size: 12px;
+}
+
+#tbl img {
+    width: 100px;
+    height: 100px;
+}
+#tbl tr td {
+    vertical-align: middle;
+}
+
+.mb-5px {
+    margin-bottom: 5px;
 }

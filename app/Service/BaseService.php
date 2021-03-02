@@ -8,5 +8,5 @@ interface BaseService {
     public function getData($params);
     public function changeStatus($id);
     public function findByUrl($url);
-    public function getDataActive();
+    public function getByStatus($status);
 }

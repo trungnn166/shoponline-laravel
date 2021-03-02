@@ -55,8 +55,12 @@ class BrandServiceImpl implements BrandService {
         }
     }
 
-    public function getDataActive() {
-        $data = Brand::where('status', 1)->get();
+    public function getByStatus($status = '') {
+        if($status == '') {
+            $data = Brand::all();
+        } else {
+            $data = Brand::where('status', $status)->get();
+        }
         return $data;
     }
 }

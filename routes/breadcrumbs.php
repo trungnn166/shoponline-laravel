@@ -49,3 +49,7 @@ Breadcrumbs::register('admin.products.create', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.products.index');
     $breadcrumbs->push('Thêm mới sản phẩm', route('admin.products.create'));
 });
+Breadcrumbs::register('admin.products.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.products.index');
+    $breadcrumbs->push('Chỉnh sửa sản phẩm', route('admin.products.edit'));
+});

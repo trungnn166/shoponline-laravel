@@ -12,6 +12,7 @@ class Category extends Model {
     protected $table = 'tbl_category';
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'status',
@@ -23,4 +24,7 @@ class Category extends Model {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
 
+    public function childrens() {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
 }

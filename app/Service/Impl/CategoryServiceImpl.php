@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Service\CategoryService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use function GuzzleHttp\Promise\all;
+
 class CategoryServiceImpl implements CategoryService {
 
     public function getData($params) {
@@ -55,15 +57,25 @@ class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    public function getDataActive() {
-        $data = Category::where('status', 1)->get();
+    public function getByStatus($status = '') {
+        if($status == '') {
+            $data = Category::all();
+        } else {
+            $data = Category::where('status', $status)->get();
+        }
         return $data;
     }
 
-    public function getListParent() {
-        $parents = Category::where(function ($q) {
-            $q->whereNull('parent_id')->orWhere('parent_id', 0);
-        })->get();
+    public function getListParent($status = '') {
+        if($status == '') {
+            $parents = Category::where(function ($q) {
+                $q->whereNull('parent_id')->orWhere('parent_id', 0);
+            })->get();
+        } else {
+            $parents = Category::where('status', 1)->where(function ($q) {
+                $q->whereNull('parent_id')->orWhere('parent_id', 0);
+            })->get();
+        }
         return $parents;
     }
 }

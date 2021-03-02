@@ -19,4 +19,9 @@ class Constants {
         'icon' => 'fa fa-exclamation-circle',
         'status' => 500
     ];
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_NOT_ACTIVE = 2;
+
+    const PATH_UPLOAD_IMAGE_PRODUCT = '/upload/images/products/';
 }

@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ProductServiceImpl implements ProductService {
 
     public function getData($params) {
-        // $name = isset($params['name']) ? $params['name'] : '';
-        // $data = Brand::where('name', 'LIKE',  '%'.$name.'%')->paginate(Constants::PAGE_SIZE);
-        // $data->appends($params);
-        // return $data;
+        $name = isset($params['name']) ? $params['name'] : '';
+        $data = Product::where('name', 'LIKE',  '%'.$name.'%')->paginate(Constants::PAGE_SIZE);
+        $data->appends($params);
+        return $data;
     }
 
     public function findByUrl($url) {
@@ -26,19 +26,25 @@ class ProductServiceImpl implements ProductService {
     }
 
     public function create($data) {
-        // $data['url'] = Helper::createUrl($data['name']);
-        // return Brand::create($data);
+        $data['url'] = Helper::createUrl($data['name']);
+        $tagsStr = implode(",", $data['tags']);
+        $data['tags'] = $tagsStr;
+        $data['tags_slug'] = Helper::slugTag($tagsStr);
+        return Product::create($data);
     }
 
     public function update($data) {
-        // $data['url'] = Helper::createUrl($data['name']);
-        // try {
-        //     $brand = Brand::findOrFail($data['id']);
-        //     $result =  $brand->update($data);
-        //     return (($result) ? $data['url'] : false);
-        // } catch (ModelNotFoundException $e) {
-        //     return false;
-        // }
+        $data['url'] = Helper::createUrl($data['name']);
+        $tagsStr = implode(",", $data['tags']);
+        $data['tags'] = $tagsStr;
+        $data['tags_slug'] = Helper::slugTag($tagsStr);
+        try {
+            $product = Product::findOrFail($data['id']);
+            $result =  $product->update($data);
+            return (($result) ? $data['url'] : false);
+        } catch (ModelNotFoundException $e) {
+            return false;
+        }
     }
 
     public function destroy($ids) {
@@ -56,7 +62,8 @@ class ProductServiceImpl implements ProductService {
         }
     }
 
-    public function getDataActive() {
+    public function getByStatus($status = '') {
         
     }
+    
 }

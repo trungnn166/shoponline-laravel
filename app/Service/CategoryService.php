@@ -2,5 +2,5 @@
 namespace App\Service;
 
 interface CategoryService extends BaseService {
-    public function getListParent();
+    public function getListParent($status);
 }

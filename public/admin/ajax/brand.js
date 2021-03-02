@@ -1,5 +1,5 @@
 $(function() {
-    const URL_BRAND = '/admin/api/brands';
+    const URL_API = '/admin/api/brands';
 
     $("#check-all").on('click', function() {
         $(".input-checkbox").prop('checked', $(this).prop('checked'));  
@@ -15,19 +15,19 @@ $(function() {
         var ids = $('input[name="ids[]"]:checked').map(function(){
             return $(this).val();
         }).get();
-        var url = URL_BRAND + '/delete';
+        var url = URL_API + '/delete';
         destroy(url, ids);
     })
 
     $('#tbl').on("click", '.btn-status', function() {
         var id = $(this).attr('id');
-        url = URL_BRAND + '/change-status/' + id;
+        url = URL_API + '/change-status/' + id;
         changeStatus(url);
     });
 
     $('#tbl').on("click", '.btn-delete', function() {
         var ids = [$(this).attr('id')];
-        var url = URL_BRAND + '/delete';
+        var url = URL_API + '/delete';
         destroy(url, ids);
     });
 

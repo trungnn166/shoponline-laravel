@@ -12,6 +12,7 @@ class Brand extends Model {
     protected $table = 'tbl_brand';
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'status',

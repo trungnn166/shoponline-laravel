@@ -16,6 +16,7 @@ class Helper {
         $str = Str::of($name)->slug('-')."-".Helper::randomString(12);
         return $str;
     }
+
     public static function createMessage($res, $type) {
         switch($type) {
             case Constants::TYPE_CREATE:
@@ -34,6 +35,7 @@ class Helper {
         }
         return $res;
     }
+
     public static function createResponseSuccess($type) {
         $res = Constants::RESPONSE_NOTIFICATION_SUCCESS;
         $res = Helper::createMessage($res, $type);
@@ -57,5 +59,19 @@ class Helper {
         $res = Helper::createMessage($res, $type);
         $request->session()->flash('alert-danger', $res);
     }
-    
+
+    public static function uploadFile($file, $path) {
+        $fileName = date('y-m-d-h_h-i-s').'_'.$file->getClientOriginalName();
+        $file->move(public_path($path), $fileName);
+        return $path.$fileName;
+    }
+
+    public static function slugTag($tags) {
+        $tagsArr = explode(',', $tags);
+        $slugTags = array();
+        foreach($tagsArr as $tag) {
+            $slugTags[] = Str::of($tag)->slug('-');
+        }
+        return implode(",", $slugTags);
+    }
 }

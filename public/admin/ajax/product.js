@@ -1,5 +1,5 @@
 $(function() {
-    const URL_API = '/admin/api/categories';
+    const URL_API = '/admin/api/products';
 
     $("#check-all").on('click', function() {
         $(".input-checkbox").prop('checked', $(this).prop('checked'));  
@@ -29,6 +29,10 @@ $(function() {
         var ids = [$(this).attr('id')];
         var url = URL_API + '/delete';
         destroy(url, ids);
+    });
+
+    $("#input-image").on("change", function() {
+        readURL(this, "image-preview");
     });
 
 });
