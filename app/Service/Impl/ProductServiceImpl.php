@@ -3,12 +3,15 @@ namespace App\Service\Impl;
 
 use App\Helper\Constants;
 use App\Helper\Helper;
-use App\Models\Brand;
 use App\Models\Product;
 use App\Service\ProductService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductServiceImpl implements ProductService {
+    private $productImageService;
+    public function __construct(ProductImageServiceImpl $productImageService) {
+		$this->productImageService = $productImageService;
+	}    
 
     public function getData($params) {
         $name = isset($params['name']) ? $params['name'] : '';
@@ -30,7 +33,10 @@ class ProductServiceImpl implements ProductService {
         $tagsStr = implode(",", $data['tags']);
         $data['tags'] = $tagsStr;
         $data['tags_slug'] = Helper::slugTag($tagsStr);
-        return Product::create($data);
+        $product = new Product($data);
+        $product->save();
+        $this->productImageService->updateProductId($data['image_ids'], $product->id);
+        return $product;
     }
 
     public function update($data) {

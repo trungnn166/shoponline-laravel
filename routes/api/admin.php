@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProductImageController;
 use Illuminate\Support\Facades\Route;
 
 //api quan ly
@@ -22,6 +23,12 @@ Route::group(['prefix'=>'admin/api','as'=>'admin.api.'], function () {
         Route::group(['prefix'=>'products','as'=>'products.'], function () {
             Route::put('change-status/{id?}', [ProductController::class, 'changeStatus'])->name('changeStatus');
             Route::delete('delete', [ProductController::class, 'destroy'])->name('destroy');
+        });
+
+        //product images api
+        Route::group(['prefix'=>'product-images','as'=>'products.images'], function () {
+            Route::post('store', [ProductImageController::class, 'store'])->name('store');
+            Route::delete('delete', [ProductImageController::class, 'destroy'])->name('destroy');
         });
     });
 });

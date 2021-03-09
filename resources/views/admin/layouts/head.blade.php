@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     {{-- tag input --}}
     <link rel="stylesheet" href="{{asset('admin/css/bootstrap-tagsinput.css')}}">
+    {{-- dropzone --}}
+    <link rel="stylesheet" href="{{asset('admin/css/dropzone.css')}}">
 
     <!-- //calendar -->
     <!-- //font-awesome icons -->
@@ -42,6 +44,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     {{-- tag input --}}
     <script src="{{asset('admin/js/bootstrap-tagsinput.js')}}"></script>
+    {{-- dropzone js --}}
+    <script src="{{asset('admin/js/dropzone.js')}}"></script>
+
     {{-- my js --}}
     <script src="{{asset('admin/js/common.js')}}"></script>
 </head>

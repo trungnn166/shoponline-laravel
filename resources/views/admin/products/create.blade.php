@@ -85,6 +85,11 @@
                                 <input type="text" class="form-control tag" name="tags[]" placeholder="Nhãn sản phẩm" data-role="tagsinput">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Hình ảnh chi tiết</label>
+                            <div id="detail-image" class="dropzone "></div>
+                            <input id="image-ids" type="hidden" name="image_ids">
+                        </div>
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-info">Thêm mới</button>
                         <div>
@@ -95,5 +100,51 @@
     </div>
 </div>
 <script src="{{asset('admin/ajax/product.js')}}"></script>
-
+<script>
+    Dropzone.autoDiscover = false;
+    $(function () {
+        var dropzone = new Dropzone ("#detail-image", {
+        dictDefaultMessage: "Kéo, thả file vào đây hoặc nhấp vào để tải lên",
+        uploadMultiple: true,
+        addRemoveLinks: true,
+        url: "/admin/api/product-images/store",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        init: function() {
+            this.on('addedfile', function(file) {
+              
+            });
+        },
+        removedfile: function(file) {
+            var id = file.serverId;
+            $.ajax({
+                type: 'delete',
+                url: "/admin/api/product-images/delete?id="+id,
+                success: function (data){
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+            var fileRef;
+            return (fileRef = file.previewElement) != null ? fileRef.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        success: function(file, response) {
+            file.serverId = response.id; 
+            ids = $('#image-ids').val();
+            if(ids == '') {
+                ids+=response.id;
+            }  else {
+                ids = ids + ',' + response.id;
+            } 
+            $('#image-ids').val(ids);
+        },
+        error: function(file, response) {
+            return false;
+        }
+    });   
+})
+</script>
 @endsection

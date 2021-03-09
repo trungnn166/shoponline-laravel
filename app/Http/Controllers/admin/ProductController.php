@@ -60,7 +60,7 @@ class ProductController extends Controller {
             $data['image'] = Helper::uploadFile($request->image, Constants::PATH_UPLOAD_IMAGE_PRODUCT);
         }
         $result = $this->productService->create($data);
-        ($result) ? Helper::createFlashSuccess($request, Constants::TYPE_CREATE) : Helper::createFlashFail($request, Constants::TYPE_CREATE);
+        ($result != null) ? Helper::createFlashSuccess($request, Constants::TYPE_CREATE) : Helper::createFlashFail($request, Constants::TYPE_CREATE);
         return redirect()->route('admin.products.create'); 
     }
 
