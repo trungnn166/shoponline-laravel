@@ -1,5 +1,5 @@
 $(function() {
-    const URL_API = '/admin/api/products';
+    const URL_API = '/admin/api/banners';
 
     $("#check-all").on('click', function() {
         $(".input-checkbox").prop('checked', $(this).prop('checked'));  

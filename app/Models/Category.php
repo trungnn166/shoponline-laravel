@@ -11,14 +11,7 @@ class Category extends Model {
 
     protected $table = 'tbl_category';
 
-    protected $fillable = [
-        'id',
-        'name',
-        'description',
-        'status',
-        'url',
-        'parent_id'
-    ];
+    protected $fillable = ['id', 'name', 'description', 'status', 'url', 'parent_id'];
 
     public function parent() {
         return $this->belongsTo(Category::class, 'parent_id', 'id');

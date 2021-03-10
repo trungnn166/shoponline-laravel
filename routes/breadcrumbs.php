@@ -45,11 +45,30 @@ Breadcrumbs::register('admin.products.index', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.dashboard');
     $breadcrumbs->push('Danh sách sản phẩm', route('admin.products.index'));
 });
+
 Breadcrumbs::register('admin.products.create', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.products.index');
     $breadcrumbs->push('Thêm mới sản phẩm', route('admin.products.create'));
 });
+
 Breadcrumbs::register('admin.products.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.products.index');
     $breadcrumbs->push('Chỉnh sửa sản phẩm', route('admin.products.edit'));
+});
+
+
+//breadcrumbs banners
+Breadcrumbs::register('admin.banners.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Danh sách banner', route('admin.banners.index'));
+});
+
+Breadcrumbs::register('admin.banners.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.banners.index');
+    $breadcrumbs->push('Thêm mới banner', route('admin.banners.create'));
+});
+
+Breadcrumbs::register('admin.banners.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.banners.index');
+    $breadcrumbs->push('Chỉnh sửa banner', route('admin.banners.edit'));
 });

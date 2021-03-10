@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
@@ -39,6 +40,15 @@ Route::group(['prefix'=>'quan-ly','as'=>'admin.'], function () {
             Route::post('them-moi', [ProductController::class, 'store'])->name('store');
             Route::get('chinh-sua/{url?}', [ProductController::class, 'edit'])->name('edit');
             Route::post('cap-nhat', [ProductController::class, 'update'])->name('update');
+        });
+
+        //route banner
+        Route::group(['prefix'=>'banner','as'=>'banners.'], function () {
+            Route::get('', [BannerController::class, 'index'])->name('index');
+            Route::get('/them-moi', [BannerController::class, 'create'])->name('create');
+            Route::post('them-moi', [BannerController::class, 'store'])->name('store');
+            Route::get('chinh-sua/{url?}', [BannerController::class, 'edit'])->name('edit');
+            Route::post('cap-nhat', [BannerController::class, 'update'])->name('update');
         });
     });
 });

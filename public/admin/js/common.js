@@ -95,3 +95,9 @@ function readURL(input, id) {
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
+
+$(function() {
+    $("#input-image").on("change", function() {
+        readURL(this, "image-preview");
+    });
+})

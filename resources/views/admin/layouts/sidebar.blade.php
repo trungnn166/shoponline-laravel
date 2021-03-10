@@ -40,6 +40,16 @@
                         <li><a href="{{ route('admin.products.create') }}" class="{{Route::is('admin.products.create') ? 'active' : ''}}">Thêm sản phẩm</a></li>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="{{Route::is('admin.banners.*') ? 'active' : ''}}">
+                        <i class="fa fa-product-hunt"></i>
+                        <span>Banner</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{ route('admin.banners.index') }}" class="{{Route::is('admin.banners.index') ? 'active' : ''}}">Danh sách</a></li>
+                        <li><a href="{{ route('admin.banners.create') }}" class="{{Route::is('admin.banners.create') ? 'active' : ''}}">Thêm banner</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- sidebar menu end-->

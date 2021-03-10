@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
@@ -29,6 +30,12 @@ Route::group(['prefix'=>'admin/api','as'=>'admin.api.'], function () {
         Route::group(['prefix'=>'product-images','as'=>'products.images'], function () {
             Route::post('store', [ProductImageController::class, 'store'])->name('store');
             Route::delete('delete', [ProductImageController::class, 'destroy'])->name('destroy');
+        });
+
+         //banner api
+         Route::group(['prefix'=>'banners','as'=>'banners'], function () {
+            Route::put('change-status/{id?}', [BannerController::class, 'changeStatus'])->name('changeStatus');
+            Route::delete('delete', [BannerController::class, 'destroy'])->name('destroy');
         });
     });
 });

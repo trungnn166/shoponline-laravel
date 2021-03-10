@@ -99,7 +99,6 @@
         </section>
     </div>
 </div>
-<script src="{{asset('admin/ajax/product.js')}}"></script>
 <script>
     Dropzone.autoDiscover = false;
     $(function () {
